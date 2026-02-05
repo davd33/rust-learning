@@ -1,0 +1,8 @@
+[package]
+name = "rust-tests"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+reqwest = "0.12.24"
+trpl = "0.3.0"
