@@ -15,8 +15,8 @@ async fn page_title(url: &str) -> (Option<String>, Duration) {
 	)
 }
 
-fn get_faster_response(run: bool) {
-	if !run {
+fn get_faster_response(feature: &Feature) {
+	if *feature != Feature::WebScrapper {
 		return;
 	}
 
@@ -43,8 +43,8 @@ fn get_faster_response(run: bool) {
 	println!("---");
 }
 
-fn count_to_10_threads(run: bool) {
-	if !run {
+fn count_to_10_threads(feature: &Feature) {
+	if *feature != Feature::Count10Threads {
 		return;
 	}
 
@@ -71,8 +71,8 @@ fn count_to_10_threads(run: bool) {
 	println!("---");
 }
 
-fn count_to_10_tasks(run: bool) {
-	if !run {
+fn count_to_10_tasks(feature: &Feature) {
+	if *feature != Feature::Count10Tasks {
 		return;
 	}
 
@@ -100,8 +100,8 @@ fn count_to_10_tasks(run: bool) {
 	println!("---");
 }
 
-fn futures_msg_passing(run: bool) {
-	if !run {
+fn futures_msg_passing(feature: &Feature) {
+	if *feature != Feature::FuturesMsgPassing {
 		return;
 	}
 
@@ -118,9 +118,19 @@ fn futures_msg_passing(run: bool) {
 	println!("---");
 }
 
+#[derive(PartialEq, Eq)]
+enum Feature {
+    WebScrapper,
+    Count10Threads,
+    Count10Tasks,
+    FuturesMsgPassing,
+}
+
 fn main() {
-	get_faster_response(false);
-	count_to_10_threads(false);
-	count_to_10_tasks(false);
-	futures_msg_passing(true);
+    let feature = Feature::FuturesMsgPassing;
+
+	get_faster_response(&feature);
+	count_to_10_threads(&feature);
+	count_to_10_tasks(&feature);
+	futures_msg_passing(&feature);
 }
