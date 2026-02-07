@@ -109,10 +109,19 @@ fn futures_msg_passing(feature: &Feature) {
 
 	trpl::block_on(async {
 		let (tx, mut rx) = trpl::channel();
-		let val = "hello bro";
-		tx.send(val).unwrap();
-		let received = rx.recv().await.unwrap();
-		println!("received = {}", received);
+		let messages = vec![
+            "hello bro",
+            "how are you?",
+        ];
+
+        for msg in messages {
+            tx.send(msg).unwrap();
+            trpl::sleep(Duration::from_secs(1)).await;
+        }
+
+		while let Some(received_msg) = rx.recv().await {
+            println!("received = {}", received_msg);
+        }
 	});
 
 	println!("---");
