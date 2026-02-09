@@ -1,6 +1,7 @@
 use std::sync::{Arc, Mutex};
 use std::thread;
 use crate::feature::Feature;
+use crate::print::print_separator;
 
 pub fn count_to_10_threads(feature: &Feature) {
     if *feature != Feature::Count10Threads {
@@ -27,5 +28,6 @@ pub fn count_to_10_threads(feature: &Feature) {
     }
 
     println!("Last result = {}", cnt.lock().unwrap());
-    println!("---");
+
+    print_separator();
 }

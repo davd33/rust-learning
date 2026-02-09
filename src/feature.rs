@@ -4,4 +4,6 @@ pub enum Feature {
     Count10Threads,
     Count10Tasks,
     FuturesMsgPassing,
+    Iter,
+    Streams,
 }

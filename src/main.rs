@@ -1,15 +1,22 @@
-mod web_scrapper;
 mod feature;
-mod threads;
-mod futures;
+mod iterators;
+mod print;
+mod concurrency;
 
+use concurrency::{futures, threads, web_scrapper};
+use crate::concurrency::streams::basic_stream;
 use crate::feature::Feature;
+use crate::iterators::owned_iter;
 
 fn main() {
-    let feature = Feature::FuturesMsgPassing;
+    let feature = Feature::Streams;
 
 	web_scrapper::get_faster_response(&feature);
 	threads::count_to_10_threads(&feature);
 	futures::count_to_10_tasks(&feature);
 	futures::futures_msg_passing(&feature);
+    
+    basic_stream(&feature);
+
+    owned_iter(&feature);
 }

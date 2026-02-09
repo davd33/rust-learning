@@ -1,6 +1,7 @@
 use std::time::{Duration, Instant};
 use trpl::Html;
 use crate::feature::Feature;
+use crate::print::print_separator;
 
 async fn page_title(url: &str) -> (Option<String>, Duration) {
     let start = Instant::now();
@@ -40,5 +41,5 @@ pub fn get_faster_response(feature: &Feature) {
         }
     });
 
-    println!("---");
+    print_separator();
 }

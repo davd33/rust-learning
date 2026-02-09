@@ -1,5 +1,6 @@
 use std::{sync::{Arc, Mutex}, time::Duration};
 use crate::feature::Feature;
+use crate::print::print_separator;
 
 pub fn count_to_10_tasks(feature: &Feature) {
     if *feature != Feature::Count10Tasks {
@@ -27,7 +28,8 @@ pub fn count_to_10_tasks(feature: &Feature) {
 
         println!("Last result = {}", cnt.lock().unwrap());
     });
-    println!("---");
+    
+    print_separator();
 }
 
 pub fn futures_msg_passing(feature: &Feature) {
@@ -60,6 +62,6 @@ pub fn futures_msg_passing(feature: &Feature) {
 
         trpl::join(f1, f2).await;
     });
-
-    println!("---");
+    
+    print_separator()
 }
