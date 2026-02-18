@@ -7,4 +7,5 @@ pub enum Feature {
     MovePinnedFuture,
     Iter,
     Streams,
+    GUI,
 }
