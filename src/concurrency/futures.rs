@@ -1,4 +1,5 @@
 use std::{sync::{Arc, Mutex}, time::Duration};
+use std::pin::{pin, Pin};
 use crate::feature::Feature;
 use crate::print::print_separator;
 
@@ -62,6 +63,30 @@ pub fn futures_msg_passing(feature: &Feature) {
 
         trpl::join(f1, f2).await;
     });
-    
+
+    print_separator()
+}
+
+pub fn move_pinned_future(feature: &Feature) {
+    if *feature != Feature::MovePinnedFuture {
+        return;
+    }
+
+    println!("MOVING A PINNED FUTURE");
+
+    trpl::block_on(async {
+        let print_smtg = pin!(async {
+            println!("SMTG");
+        });
+
+        let print_smtg_else = pin!(async {
+            trpl::sleep(Duration::from_secs(1)).await;
+            println!("SMTH ELSE!");
+        });
+
+        let v: Vec<Pin<&mut dyn Future<Output = ()>>> = vec![print_smtg, print_smtg_else];
+        trpl::join_all(v).await;
+    });
+
     print_separator()
 }
